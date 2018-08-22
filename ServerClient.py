@@ -33,24 +33,18 @@ def send_data_to_server(filename, df):
     request = request + " ,".encode('utf-8')
     print("Sending file name to server")
     s.send(request)
-    request = "".encode('utf-8')
+    request = ""
     for heading in df.columns.values:
-        request = request + str(heading).encode('utf-8') + ",".encode('utf-8')
-    request = request + "\n".encode('utf-8')
-    s.send(request)
-    for item, value in df.iterrows():
+        request = request + str(heading) + ","
+    request = request + "\n"
+    s.send(request.encode('utf-8'))
+    for r in range(1, df.shape[0]):
+        request = ""
         print("Adding row")
-        request = str(item).encode('utf-8')+",".encode('utf-8')
-        for entry in value:
-            request = request + str(entry).encode('utf-8')+",".encode('utf-8')
-        request = request + "\n".encode('utf-8')
-        try:
-            print("# Sending row to server")
-            s.send(request)
-            print('# Row sent to server')
-        except socket.error:
-            print('Send failed')
-            sys.exit()
+        for c in range(0, df.shape[1]):
+            request = request + str(df.iloc[r, c]) + ","
+        request = request + "\n"
+        s.send(request.encode('utf-8'))
     request = "END\n".encode('utf-8')
     try:
         print("# End of file")

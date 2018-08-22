@@ -218,6 +218,10 @@ def getData(stud):
         return df
 
 
+def write_to_csv(frame, filename):
+    frame.to_csv(filename)
+
+
 def EWMA_main():
     studs = config.config['Stud_list']
     print("Stud count : "+str(len(studs)))
@@ -226,10 +230,13 @@ def EWMA_main():
         parameter_val = config.config['Parameter_Fields_list']
         frame = getData(stud)
         frame = CalculateEWMA(stud, frame, 0.75, parameter_val)
+        _thread.start_new_thread(write_to_csv, (frame,
+                                                config.config['EWMA_files_dump']+"\\"+str(stud) + "_EWMA_Values.csv"))
         #frame.to_csv(config.config['EWMA_files_dump']+"\\"+str(stud)+ "_EWMA_Values.csv")
-        connect_to_server()
-        _thread.start_new_thread(send_data_to_server,
-                                 (config.config['EWMA_files_dump']+"\\"+str(stud)+ "_EWMA_Values.csv", frame))
+        #connect_to_server()
+        #send_data_to_server(config.config['EWMA_files_dump']+"\\"+str(stud)+ "_EWMA_Values.csv", frame)
+        #_thread.start_new_thread(send_data_to_server,
+          #                       (config.config['EWMA_files_dump']+"\\"+str(stud)+ "_EWMA_Values.csv", frame))
         #gc.collect()
     print("EWMA Complete")
     return True

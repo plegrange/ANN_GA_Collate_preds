@@ -1,6 +1,6 @@
 config = {'Central_data_intersection':'C:\\Users\PHLEGRA\Desktop\MASTER\Data_intersection\Prescribed_parameters',
         'server': 's175BSQLQ101.zarsa.corpintra.net',
-        'Stud_list':['6200011','6300120','6200029','6200026','6200797','6200129','6200808','6100208','610070','610007','6200189','6200668','6200341','6200669','6200032'],
+        'Stud_list':['6200011','6300120','6200029','6200026','6200797','6200129','6200808','610070','610007','6200189','6200668','6200341','6200669','6200032'],
         'Parameter_Fields_list':['DropTime act', 'DropTime difference', 'Lift Height act', 'Main WeldCurrent Arc Voltage act',
                                  'Pilot WeldCurrent Arc Voltage Act', 'Stickout', 'WeldCurrent act Positive','WeldCurrent act Negative',
                                  'WeldTime Act','Penetration act'],
